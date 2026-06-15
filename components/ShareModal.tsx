@@ -62,6 +62,7 @@ export function ShareModal({ spot, distanceText, showQrShare, onClose }: ShareMo
 
   // ── WhatsApp ──────────────────────────────────────────────────────────────
   const handleWhatsApp = useCallback(async () => {
+    Analytics.whatsappShareClicked(!!spot.photo);
     // If there's a parking photo and the browser supports file sharing,
     // use the Web Share API so the image goes directly into WhatsApp.
     if (spot.photo && navigator.canShare) {

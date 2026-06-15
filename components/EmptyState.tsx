@@ -3,6 +3,7 @@
 import { motion } from "framer-motion";
 import { MapPin } from "lucide-react";
 import Image from "next/image";
+import { Analytics } from "@/services/analytics";
 
 interface EmptyStateProps {
   onSave: () => void;
@@ -139,7 +140,7 @@ export function EmptyState({ onSave }: EmptyStateProps) {
         transition={{ delay: 0.4, type: "spring", stiffness: 260, damping: 20 }}
         whileTap={{ scale: 0.95 }}
         whileHover={{ scale: 1.03 }}
-        onClick={onSave}
+        onClick={() => { Analytics.saveSpotClicked(); onSave(); }}
         className="btn-gradient relative w-full max-w-xs rounded-2xl py-4 px-8 text-white font-bold text-base flex items-center justify-center gap-2.5 shadow-2xl"
         style={{ boxShadow: "0 8px 32px rgba(139,92,246,0.45)" }}
       >

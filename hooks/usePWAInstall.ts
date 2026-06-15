@@ -36,7 +36,7 @@ export function usePWAInstall() {
     await deferredPrompt.prompt();
     const { outcome } = await deferredPrompt.userChoice;
     if (outcome === "accepted") {
-      Analytics.pwaInstallAccepted();
+      Analytics.pwaInstalled();
       setIsInstalled(true);
     }
     setIsInstallable(false);

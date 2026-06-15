@@ -65,6 +65,7 @@ export function SaveFlow({ onSuccess, onCancel }: SaveFlowProps) {
   // ── Step: Location ───────────────────────────────────────────────────────
 
   const handleGetLocation = async () => {
+    Analytics.locationRequested();
     const coords = await requestLocation();
     if (coords) {
       setState((s) => ({ ...s, coordinates: coords }));
@@ -151,17 +152,32 @@ export function SaveFlow({ onSuccess, onCancel }: SaveFlowProps) {
     if (!state.coordinates) return;
     setState((s) => ({ ...s, step: "saving" }));
 
+    const { latitude, longitude } = state.coordinates;
+
+    // Track note entry before saving
+    if (state.note.trim().length > 0) {
+      Analytics.parkingNoteEntered(state.note.trim().length);
+    }
+
     try {
       await saveSpot({
-        latitude: state.coordinates.latitude,
-        longitude: state.coordinates.longitude,
+        latitude,
+        longitude,
         photo: state.photo,
         note: state.note || undefined,
         vehicleType: state.vehicleType,
         vehicleName: state.vehicleName || undefined,
       });
 
-      Analytics.parkingSaved(!!state.note, !!state.photo);
+      Analytics.parkingSaved(!!state.note, !!state.photo, latitude, longitude);
+
+      // First-ever save detection
+      const saveCount = parseInt(localStorage.getItem("pp_save_count") ?? "0", 10);
+      if (saveCount === 0) {
+        Analytics.firstParkingSaved(latitude, longitude);
+      }
+      localStorage.setItem("pp_save_count", String(saveCount + 1));
+
       onSuccess();
     } catch {
       setState((s) => ({ ...s, step: "note", error: "Failed to save. Please try again." }));

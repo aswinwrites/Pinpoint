@@ -28,24 +28,35 @@ export type LocationPermission = "granted" | "denied" | "prompt" | "unavailable"
 // ─── Analytics ───────────────────────────────────────────────────────────────
 
 export type AnalyticsEvent =
+  // Session
   | "app_open"
-  | "parking_saved"
+  | "first_visit"
+  | "return_visit"
+  // Save flow
+  | "save_spot_clicked"           // tapped "Save Parking Spot" CTA
+  | "location_requested"          // tapped "Use My Location"
+  | "location_permission_granted"
+  | "location_permission_denied"
+  | "photo_captured"
+  | "parking_note_entered"        // user typed a note before saving
+  | "parking_saved"               // spot successfully saved
+  | "first_parking_saved"         // very first save ever
   | "parking_deleted"
   | "parking_replaced"
+  | "parking_viewed"
+  // Navigation
   | "navigation_started"
-  | "photo_captured"
+  // Share
   | "share_clicked"
+  | "whatsapp_share_clicked"
   | "share_success"
   | "share_failed"
   | "share_image_generated"
-  | "location_permission_granted"
-  | "location_permission_denied"
+  // PWA
   | "pwa_install_prompt_shown"
-  | "pwa_install_accepted"
-  | "distance_viewed"
-  | "parking_viewed"
-  | "first_visit"
-  | "return_visit";
+  | "pwa_installed"
+  // Misc
+  | "distance_viewed";
 
 export type AnalyticsParams = Record<string, string | number | boolean | undefined>;
 

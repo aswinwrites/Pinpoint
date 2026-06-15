@@ -13,10 +13,28 @@ async function getAnalytics(): Promise<Analytics | null> {
   if (!app) return null;
 
   try {
-    const { getAnalytics: _getAnalytics, isSupported } = await import("firebase/analytics");
+    const {
+      getAnalytics: _getAnalytics,
+      isSupported,
+      setAnalyticsCollectionEnabled,
+      setUserProperties,
+    } = await import("firebase/analytics");
     if (!(await isSupported())) return null;
     if (!_analytics) {
       _analytics = _getAnalytics(app);
+      setAnalyticsCollectionEnabled(_analytics, true);
+      // User properties for segmentation in Firebase / GA4
+      setUserProperties(_analytics, {
+        app_version: "1.0.0",
+        platform: typeof navigator !== "undefined"
+          ? (/iphone|ipad|ipod/i.test(navigator.userAgent) ? "ios"
+            : /android/i.test(navigator.userAgent) ? "android"
+            : "desktop")
+          : "unknown",
+        pwa_installed: window.matchMedia("(display-mode: standalone)").matches
+          ? "true"
+          : "false",
+      });
     }
     return _analytics;
   } catch {
