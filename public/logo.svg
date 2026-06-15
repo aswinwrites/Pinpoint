@@ -1,0 +1,65 @@
+<svg viewBox="0 0 400 400" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <radialGradient id="pinGrad" cx="40%" cy="30%" r="65%">
+      <stop offset="0%" stop-color="#d078f0"/>
+      <stop offset="50%" stop-color="#9333ea"/>
+      <stop offset="100%" stop-color="#6b21a8"/>
+    </radialGradient>
+    <radialGradient id="pinShine" cx="35%" cy="25%" r="50%">
+      <stop offset="0%" stop-color="rgba(255,255,255,0.35)"/>
+      <stop offset="100%" stop-color="rgba(255,255,255,0)"/>
+    </radialGradient>
+    <filter id="shadow" x="-20%" y="-10%" width="140%" height="140%">
+      <feDropShadow dx="0" dy="8" stdDeviation="12" flood-color="#7c3aed" flood-opacity="0.5"/>
+    </filter>
+    <filter id="smallShadow">
+      <feDropShadow dx="0" dy="3" stdDeviation="4" flood-color="#7c3aed" flood-opacity="0.4"/>
+    </filter>
+  </defs>
+
+  <!-- Left small pin -->
+  <g filter="url(#smallShadow)">
+    <ellipse cx="103" cy="258" rx="10" ry="4" fill="rgba(147,51,234,0.3)"/>
+    <path d="M103 234 C103 234 88 250 88 258 C88 266 95 272 103 272 C111 272 118 266 118 258 C118 250 103 234 103 234Z" fill="#9333ea"/>
+    <circle cx="103" cy="254" r="6" fill="#1a0533"/>
+  </g>
+
+  <!-- Right small pin -->
+  <g filter="url(#smallShadow)">
+    <ellipse cx="297" cy="258" rx="10" ry="4" fill="rgba(147,51,234,0.3)"/>
+    <path d="M297 234 C297 234 282 250 282 258 C282 266 289 272 297 272 C305 272 312 266 312 258 C312 250 297 234 297 234Z" fill="#9333ea"/>
+    <circle cx="297" cy="254" r="6" fill="#1a0533"/>
+  </g>
+
+  <!-- Dashed arc left -->
+  <path d="M115 250 Q170 220 190 235" stroke="#9333ea" stroke-width="3" stroke-dasharray="6,5" fill="none" opacity="0.8"/>
+  <!-- Dashed arc right -->
+  <path d="M210 235 Q230 220 285 250" stroke="#9333ea" stroke-width="3" stroke-dasharray="6,5" fill="none" opacity="0.8"/>
+
+  <!-- Main pin shadow ellipse -->
+  <ellipse cx="200" cy="268" rx="32" ry="10" fill="rgba(147,51,234,0.25)"/>
+
+  <!-- Main pin body -->
+  <g filter="url(#shadow)">
+    <path d="M200 80
+      C155 80 118 117 118 162
+      C118 207 200 268 200 268
+      C200 268 282 207 282 162
+      C282 117 245 80 200 80Z"
+      fill="url(#pinGrad)"/>
+    <!-- Shine overlay -->
+    <path d="M200 80
+      C155 80 118 117 118 162
+      C118 207 200 268 200 268
+      C200 268 282 207 282 162
+      C282 117 245 80 200 80Z"
+      fill="url(#pinShine)"/>
+    <!-- Center hole -->
+    <circle cx="200" cy="158" r="34" fill="#0d0020"/>
+    <!-- Inner ring highlight -->
+    <circle cx="200" cy="158" r="34" fill="none" stroke="rgba(255,255,255,0.15)" stroke-width="2"/>
+  </g>
+
+  <!-- PinPoint text -->
+  <text x="200" y="318" text-anchor="middle" font-family="Arial, sans-serif" font-weight="900" font-size="46" letter-spacing="-1" fill="#9333ea">PinPoint</text>
+</svg>
