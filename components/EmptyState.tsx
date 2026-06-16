@@ -148,15 +148,6 @@ export function EmptyState({ onSave }: EmptyStateProps) {
         Save Parking Spot
       </motion.button>
 
-      <motion.p
-        initial={{ opacity: 0 }}
-        animate={{ opacity: 1 }}
-        transition={{ delay: 0.6 }}
-        className="mt-5 text-xs"
-        style={{ color: "rgba(255,255,255,0.25)" }}
-      >
-        Works offline · No account needed · Free forever
-      </motion.p>
 
       <motion.blockquote
         initial={{ opacity: 0 }}
